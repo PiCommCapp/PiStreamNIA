@@ -1,0 +1,21 @@
+---
+- name: Add repository from PPA
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ apt_ppa_repos }}"
+  when: apt_ppa_repos is defined
+
+- name: Install Required Packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ apt_install }}"
+  when: apt_install is defined
+
+- name: Set timezone to Europe/Dublin
+  community.general.timezone:
+    name: Europe/Dublin
+
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname_hostname }}"

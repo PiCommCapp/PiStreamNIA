@@ -1,0 +1,8 @@
+---
+collections:
+  - name: ansible.posix
+roles:
+  - name: oefenweb.locales
+  - name: stouts.hostname
+  - name: geerlingguy.security
+  - name: geerlingguy.pip

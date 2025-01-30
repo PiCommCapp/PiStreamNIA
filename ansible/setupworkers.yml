@@ -1,0 +1,11 @@
+- name: Get the basics setup on linux machines
+  hosts: linux
+  vars_files: secrets.yaml
+  become: true
+  tasks:
+    - name: Basic Setup steps
+      ansible.builtin.include_tasks: tasks/linux.yml
+    - name: Service scripts
+      ansible.builtin.include_tasks: tasks/sysmenu.yml
+  roles:
+    - role: geerlingguy.security

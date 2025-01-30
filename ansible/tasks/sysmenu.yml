@@ -1,0 +1,28 @@
+---
+- name: Remove existing service script
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/support.sh"
+    state: absent
+
+- name: Create service script from template
+  ansible.builtin.template:
+    src: templates/ssh.sh.j2
+    dest: "/home/{{ ansible_user }}/support.sh"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  ignore_errors: false
+
+- name: Add alias to bashrc
+  ansible.builtin.lineinfile:
+    path: "/home/{{ ansible_user }}/.bashrc"
+    line: 'alias update="sh ./support.sh"'
+    state: present
+    create: false
+    # backrefs: false
+  ignore_errors: false
+
+- name: Source bashrc
+  ansible.builtin.shell:
+    cmd: source "/home/{{ ansible_user }}/.bashrc"
+  ignore_errors: true

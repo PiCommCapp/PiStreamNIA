@@ -1,0 +1,26 @@
+all:
+  children:
+    linux:
+      hosts:
+        streamreturn1:
+        streamreturn2:
+        streamreturn3:
+        streamreturn4:
+    raspberrypi:
+      hosts:
+        streamreturn1:
+        streamreturn2:
+        streamreturn3:
+        streamreturn4:
+    macos:
+      hosts:
+        streammanager1:
+    managers:
+      hosts:
+        streammanager1:
+    workers:
+      hosts:
+        streamreturn1:
+        streamreturn2:
+        streamreturn3:
+        streamreturn4:

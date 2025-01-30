@@ -1,0 +1,38 @@
+---
+ansible_host: "{{ streamreturn3_ip }}"
+ansible_user: "{{ linux_ansible_user }}"
+ansible_connection: ssh
+ansible_become_pass: "{{ linux_become_pass }}"
+ansible_ssh_user: "{{ linux_ansible_user }}"
+ansible_ssh_password: "{{ linux_become_pass }}"
+
+hostname_hostname: streamrtn3
+
+##### Security
+security_ssh_password_authentication: 'yes'
+security_sudoers_passwordless:
+  - "{{ linux_ansible_user }}"
+
+p10k_users:
+  - "{{ linux_ansible_user }}"
+
+##### APT
+apt_install:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - aptitude
+  - zip
+  - git
+  - build-essential
+  - libsdl2-dev 
+  - openssl 
+  - libssl-dev 
+  - libgnutls28-dev 
+  - libgles2-mesa 
+  - libgles2-mesa-dev 
+  - xorg-dev
+  - vlc
+  - snapd
