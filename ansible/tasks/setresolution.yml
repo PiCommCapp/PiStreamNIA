@@ -1,0 +1,8 @@
+---
+  - name: Check if video=HDMI-A-1:1920x1080M@50 is in cmdline.txt
+    lineinfile:
+      path: /boot/firmware/cmdline.txt
+      line: 'video=HDMI-A-1:1920x1080M@50'
+      state: present
+      insertafter: '^.*$'  # Insert after the last line, which is basically the entire file
+      regexp: '^.*video=HDMI-A-1:1920x1080M@50.*$'  # Only add it if it doesn't already exist
