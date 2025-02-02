@@ -34,5 +34,29 @@ apt_install:
   - libgles2-mesa 
   - libgles2-mesa-dev 
   - xorg-dev
-  - vlc
   - snapd
+  - python3-venv
+  - pulseaudio
+  - pulseaudio-utils
+  - libraspberrypi-dev
+  - gettext
+  - libgettextpo-dev
+  - autopoint
+  - flex
+  - bison
+  - autoconf 
+  - automake 
+  - libtool 
+  - pkg-config
+  - lua5.2
+  - libavcodec-dev
+  - libavutil-dev
+  - libavformat-dev
+  - libswscale-dev
+  - libxcb-composite0-dev 
+  - libxcb-randr0-dev 
+  - libxcb-render0-dev
+  - libxcb-shm0-dev
+  - libxcb-xkb-dev
+  - vlc
+  - libavcodec-extra
