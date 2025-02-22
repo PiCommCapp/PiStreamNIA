@@ -6,37 +6,66 @@
   },
 
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json": ["playbooks/*.yml", "tasks/*.yml"]
+    "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json": [
+      "playbooks/*.yml",
+      "tasks/*.yml"
+    ]
   },
 
   "ansible.validation.lint": "ansible-lint",
   "ansible.validation.enabled": true,
+  "ansible.useFullyQualifiedCollectionNames": true,
+  "ansible.hover.documentation": true,
+  "ansible.completion.enabled": true,
 
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
   },
+
   "[jinja]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  "ansible.useFullyQualifiedCollectionNames": true,
-  "ansible.hover.documentation": true,
-  "ansible.completion.enabled": true,
+  "[python]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
 
   "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.shellArgs.linux": ["--rcfile", "${env:HOME}/code/PiStreamNIA/.venv/bin/activate"],
-
-  "python.defaultInterpreterPath": "${env:HOME}/code/PiStreamNIA/.venv/bin/python3",
-  "python.analysis.extraPaths": [
-    "${env:HOME}/code/PiStreamNIA/.venv/lib/python3.13/site-packages"
+  "terminal.integrated.shellArgs.linux": [
+    "--rcfile",
+    "${workspaceFolder}/.venv/bin/activate"
   ],
+
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/.venv/lib/python3.13/site-packages"
+  ],
+  "python.venvPath": "${workspaceFolder}/.venv",
+  "python.venvFolders": [".venv", "venv"],
+  "python.terminal.activateEnvironment": true,
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": false,
+
+  "ansible.python.interpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "ansible.executionEnvironment.enabled": false,
 
   "git.enableSmartCommit": true,
   "git.autofetch": true,
-  "editor.codeLens": true,
-  "python-envs.pythonProjects": [],
-  "ansible.python.interpreterPath": "/Users/dcapp3/code/PiStreamNIA/.venv/bin/python"
+  "editor.codeLens": true
 }
+

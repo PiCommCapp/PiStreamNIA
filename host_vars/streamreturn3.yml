@@ -1,14 +1,11 @@
 ---
-ansible_host: "{{ streamreturn4_ip }}"
+ansible_host: "{{ streamreturn3_ip }}"
 ansible_user: "{{ linux_ansible_user }}"
 ansible_connection: ssh
 ansible_become_pass: "{{ linux_become_pass }}"
 ansible_ssh_user: "{{ linux_ansible_user }}"
 ansible_ssh_password: "{{ linux_become_pass }}"
 
-hostname_hostname: streamrtn4
+hostname_hostname: streamrtn3
 
-##### Security
-security_ssh_password_authentication: 'yes'
-security_sudoers_passwordless:
-  - "{{ linux_ansible_user }}"
+monitor_stream: 3

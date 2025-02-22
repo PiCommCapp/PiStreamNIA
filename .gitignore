@@ -5,3 +5,9 @@ passwd
 .idea/
 
 .ansible/
+.ansible
+
+.DS_Store
+
+.venv/
+venv/
