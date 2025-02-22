@@ -9,27 +9,3 @@
       ansible.builtin.include_tasks: tasks/sysmenu.yml
   roles:
     - role: geerlingguy.security
-
-- name: Restart snapd service if installed
-  hosts: linux
-  vars_files: secrets.yml
-  become: yes
-  tasks:
-    - name: Check if snapd package is installed
-      package_facts:
-
-    - name: Ensure snapd service is restarted if snapd is installed
-      service:
-        name: snapd
-        state: restarted
-      when: "'snapd' in ansible_facts.packages"
-
-- name: Setup Workers
-  hosts: workers
-  vars_files: secrets.yml
-  become: true
-  tasks:
-    - name: Install Ubuntu Frame
-      ansible.builtin.include_tasks: tasks/snap.yml
-    # - name: Set Output Resolution
-    #   ansible.builtin.include_tasks: tasks/setresolution.yml

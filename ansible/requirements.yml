@@ -1,8 +1,10 @@
 ---
 collections:
   - name: ansible.posix
+  - name: community.general
 roles:
   - name: oefenweb.locales
   - name: stouts.hostname
   - name: geerlingguy.security
   - name: geerlingguy.pip
+  - name: artis3n.tailscale

@@ -1,0 +1,9 @@
+---
+ansible_host: "{{ streammanager1_ip }}"
+ansible_user: "{{ manager1_ansible_user }}"
+ansible_connection: ssh
+ansible_become_pass: "{{ manager1_become_pass }}"
+ansible_ssh_user: "{{ manager1_ansible_user }}"
+ansible_ssh_password: "{{ manager1_become_pass }}"
+
+hostname_hostname: streammanager1

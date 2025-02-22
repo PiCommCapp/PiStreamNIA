@@ -1,0 +1,42 @@
+{
+  "files.associations": {
+    "*.yml": "ansible",
+    "*.yaml": "ansible",
+    "*.j2": "ansible-jinja"
+  },
+
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json": ["playbooks/*.yml", "tasks/*.yml"]
+  },
+
+  "ansible.validation.lint": "ansible-lint",
+  "ansible.validation.enabled": true,
+
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
+  },
+  "[jinja]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "ansible.useFullyQualifiedCollectionNames": true,
+  "ansible.hover.documentation": true,
+  "ansible.completion.enabled": true,
+
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.shellArgs.linux": ["--rcfile", "${env:HOME}/code/PiStreamNIA/.venv/bin/activate"],
+
+  "python.defaultInterpreterPath": "${env:HOME}/code/PiStreamNIA/.venv/bin/python3",
+  "python.analysis.extraPaths": [
+    "${env:HOME}/code/PiStreamNIA/.venv/lib/python3.13/site-packages"
+  ],
+
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "editor.codeLens": true,
+  "python-envs.pythonProjects": [],
+  "ansible.python.interpreterPath": "/Users/dcapp3/code/PiStreamNIA/.venv/bin/python"
+}

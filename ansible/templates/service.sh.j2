@@ -69,40 +69,13 @@ system_menu{{ "() {" }}
 ssh_config_menu{{ "() {" }}
     echo "SSH Config Menu"
     echo "1. Create SSH Key"
-    echo "2. Copy SSH ID to Knight0"
-    echo "3. Copy SSH ID to Firehouse"
-    echo "4. Copy SSH ID to Oracle0"
-    echo "5. Copy SSH ID to Scout1"
-    echo "6. Copy SSH ID to Oracle2"
-    read -p "Enter your choice {{ "(1-6)" }}: " choice
+    echo "2. Display SSH Hosts"
+    read -p "Enter your choice {{ "(1-2)" }}: " choice
 
     case $choice in
         1{{ ")" }} create_local_ssh_key ;;
         2{{ ")" }} copy_ssh_id_to_host "192.168.1.12" ;;
-        3{{ ")" }} copy_ssh_id_to_host "192.168.1.200" ;;
-        4{{ ")" }} copy_ssh_id_to_host "192.168.1.201" ;;
-        5{{ ")" }} copy_ssh_id_to_host "192.168.1.163" ;;
-        6{{ ")" }} copy_ssh_id_to_host "192.168.1.202" ;;
         *{{ ")" }} echo "Invalid option." && ssh_config_menu ;;
-    esac
-{{ "}" }}
-
-ssh_connections_menu{{ "() {" }}
-    echo "SSH Connections Menu"
-    echo "1. SSH to Knight0"
-    echo "2. SSH to Firehouse"
-    echo "3. SSH to Oracle0"
-    echo "4. SSH to Scout1"
-    echo "5. SSH to Oracle2"
-    read -p "Enter your choice {{ "(1-5)" }}: " choice
-
-    case $choice in
-        1{{ ")" }} ssh_to_host "192.168.1.12" ;;
-        2{{ ")" }} ssh_to_host "192.168.1.200" ;;
-        3{{ ")" }} ssh_to_host "192.168.1.201" ;;
-        4{{ ")" }} ssh_to_host "192.168.1.163" ;;
-        5{{ ")" }} ssh_to_host "192.168.1.202" ;;
-        *{{ ")" }} echo "Invalid option." && ssh_connections_menu ;;
     esac
 {{ "}" }}
 
@@ -110,13 +83,11 @@ main_menu{{ "() {" }}
     echo "Main Menu"
     echo "1. System"
     echo "2. SSH Config"
-    echo "3. SSH Connections"
-    read -p "Enter your choice {{ "(1-3)" }}: " choice
+    read -p "Enter your choice {{ "(1-2)" }}: " choice
 
     case $choice in
         1{{ ")" }} system_menu ;;
         2{{ ")" }} ssh_config_menu ;;
-        3{{ ")" }} ssh_connections_menu ;;
         *{{ ")" }} echo "Invalid option." && main_menu ;;
     esac
 {{ "}" }}

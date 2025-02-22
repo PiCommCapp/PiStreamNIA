@@ -1,0 +1,36 @@
+##### Install Applications
+apt_install:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - zip
+  - git
+  - build-essential
+  - libraspberrypi-dev
+  - libavcodec-extra
+  - python3-full
+  - python3-pip
+  - python3-dev
+  - python3-venv
+  - x264
+  - ffmpeg
+  - vlc
+  - zsh
+
+##### Security
+security_ssh_password_authentication: 'yes'
+security_sudoers_passwordless:
+  - "{{ linux_ansible_user }}"
+
+##### Tailscale
+# Required Node auth key to authenticate to Tailscale
+tailscale_authkey: "{{ tailscale_auth_key }}"
+# Optional command-line arguments for 'tailscale up'
+tailscale_args: ""
+# Apply provided tags to node
+tailscale_tags:
+  - worker
+  - stream
+  - rpi

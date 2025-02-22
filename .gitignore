@@ -3,3 +3,5 @@ passwd
 
 # Pycharm work folder
 .idea/
+
+.ansible/
