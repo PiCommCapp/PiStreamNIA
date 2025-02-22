@@ -74,7 +74,7 @@ ssh_config_menu{{ "() {" }}
 
     case $choice in
         1{{ ")" }} create_local_ssh_key ;;
-        2{{ ")" }} copy_ssh_id_to_host "192.168.1.12" ;;
+        2{{ ")" }} grep -E {{ "'^Host ' ~/.ssh/config | awk '{print $2}'" }} ;;
         *{{ ")" }} echo "Invalid option." && ssh_config_menu ;;
     esac
 {{ "}" }}

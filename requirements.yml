@@ -2,7 +2,9 @@
 collections:
   - name: ansible.posix
   - name: community.general
+  - name: geerlingguy.mac
 roles:
+  - name: elliotweiser.osx-command-line-tools
   - name: oefenweb.locales
   - name: stouts.hostname
   - name: geerlingguy.security

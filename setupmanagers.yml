@@ -1,12 +1,10 @@
 - name: Get the basics setup on linux machines
-  hosts: linux
+  hosts: managers
   vars_files: secrets.yml
   become: true
   tasks:
-    - name: Basic Setup steps
-      ansible.builtin.include_tasks: tasks/linux.yml
-    - name: Service scripts
-      ansible.builtin.include_tasks: tasks/sysmenu.yml
+    - name: Place SSH Config File
+      ansible.builtin.include_tasks: tasks/sshconfig.yml
     - name: Create production directories
       ansible.builtin.file:
         path: "{{ home_dir }}/{{ item }}"
@@ -20,4 +18,5 @@
     - name: Manage Off Air Card
       ansible.builtin.include_tasks: tasks/offair.yml
   roles:
-    - role: geerlingguy.security
+    - geerlingguy.mac.homebrew
+    - geerlingguy.mac.mas
