@@ -1,16 +1,16 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Install Requirements",
-        "type": "shell",
-        "command": "source ${env:HOME}/code/PIStreamNIA/.venvs/bin/activate && pip3 install -r requirements.txt",
-        "problemMatcher": [],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install Requirements",
+      "type": "shell",
+      "command": "source ${env:HOME}/code/PIStreamNIA/.venvs/bin/activate && pip3 install -r requirements.txt",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
       }
-    ]
-  }
+    }
+  ]
+}
   
