@@ -1,10 +1,10 @@
 ---
-- name: Remove existing config file
+- name: Remove existing SSH config file
   ansible.builtin.file:
     path: "{{ home_dir }}/.ssh/config"
     state: absent
 
-- name: Create service script from template
+- name: Create SSH config file
   ansible.builtin.template:
     src: templates/sshconfig.j2
     dest: "{{ home_dir }}/.ssh/config"

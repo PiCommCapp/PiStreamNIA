@@ -19,5 +19,7 @@
         - content
     - name: Manage Off Air Card
       ansible.builtin.include_tasks: tasks/offair.yml
+    - name: Manage Background Card
+      ansible.builtin.include_tasks: tasks/background.yml
   roles:
     - role: geerlingguy.security

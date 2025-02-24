@@ -1,9 +1,9 @@
-- name: Remove existing Off Air Card
+- name: Remove existing Background Card
   ansible.builtin.file:
     path: "{{ home_dir }}/content/BGCard.png"
     state: absent
 
-- name: Place Off Air Card
+- name: Place Background Card
   ansible.builtin.template:
     src: files/BGCard.png
     dest: "{{ home_dir }}/content/BGCard.png"
