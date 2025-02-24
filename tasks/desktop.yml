@@ -5,7 +5,7 @@
 
 - name: Place Off Air Card
   ansible.builtin.template:
-    src: templates/service.sh.j2
+    src: files/BGCard.png
     dest: "{{ home_dir }}/content/BGCard.png"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
