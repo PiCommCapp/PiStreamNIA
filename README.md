@@ -21,12 +21,31 @@ Open a terminal and create a SSH key and follow the prompts, no password is requ
 ssh-keygen -t ed25519 -C "gmail@gmail.com"
 ```
 
+Install Mac XCode CLI
+
+```sh
+xcode-select --install
+```
+
+Install [Homebrew](https://brew.sh/)
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Upgrade Pip
+
+```sh
+sudo pip3 install --upgrade pip
+```
+
 Create a code directory and enter it
 
 ```sh
-mkdir ~/code
+mkdir ~/code && \
 cd ~/code
 ```
+
 
 ### Worker Setup
 
@@ -43,7 +62,7 @@ ssh-copy-id admin@{IP Address}
 Connect to the RPi and update onboard software
 
 ```sh
-ssh admin@@{IP Address}
+ssh admin@{IP Address}
 sudo apt update && sudo apt upgrade -y
 ```
 
@@ -98,27 +117,50 @@ ansible-galaxy list
 
 ## Structure
 
-```bash
-|- .venv/                               # Python VENV folder
+```sh
+|- .venv/                         # Python VENV folder
 |     |- bin
 |     |     |- activate
 |     |     |- pip3
 |     |     |- python3
-|- .vscode                              # VSCode settings folder
-|     |- settings.json                             # Ansible provisioning Folder
+|- .vscode                        # VSCode settings folder
+|     |- extensions.json          # Reccomended Extensions
+|     |- settings.json            # Ansible provisioning Folder
+|     |- tasks.json               # VSCode Tasks
 |- files                          # Whole files for placement
-|     |- NIAAssemblyVimeo.xml      # BMD WebPresentor XML file (currently not working!!!)
-|     |- group_vars                     # Variables to apply to groups
-|     |     |- linux.yml                # Variables for all linux computers
-|     |     |- macos.yml                # Variables for all Mac computers
-|     |     |- managers.yml             # Variables for Management computers
-|     |     |- workers.yml              # Variables for all Worker computers
-|     |- host_vars                      # Variables to apply to specific computers
-|     |     |- streamreturn1.yml
-|     |     |- streamreturn2.yml
-|     |     |- streamreturn3.yml
-|     |     |- streamreturn4.yml
-|     |     |- streammanager1.yml
-|     |- tasks                          # Task playbooks
-|     |     |- linux.yml                # General linux provisioning tasks
-|     |     |- sysmenu.yml              # Place helper script on computers
+|     |- BGCard.png               # Desktop Image
+|     |- NIAAssemblyVimeo.xml     # BMD WebPresentor XML file (currently not working!!!)
+|     |- OffAirCard.png           # Off Air Image
+|- group_vars                     # Variables to apply to groups
+|     |- linux.yml                # Variables for all linux computers
+|     |- macos.yml                # Variables for all Mac computers
+|     |- managers.yml             # Variables for Management computers
+|     |- workers.yml              # Variables for all Worker computers
+|- host_vars                      # Variables to apply to specific computers
+|     |- streamreturn1.yml
+|     |- streamreturn2.yml
+|     |- streamreturn3.yml
+|     |- streamreturn4.yml
+|     |- streammanager1.yml
+|- tasks                          # Task playbooks
+|     |- desktop.yml              # Set Desktop Image on Workers
+|     |- linux.yml                # General linux provisioning tasks
+|     |- offair.yml               # Place Off Air image card
+|     |- sysmenu.yml              # Place helper script on computers
+|     |- sshconfig.yml            # Create SSH Config file from template
+|     |- sysmenu.yml              # Create helpful linux menu from template
+|- templates                      # Jinja2 template file
+|     |- service.sh.j2            # Linux support template
+|     |- sshconfig.j2             # SSH config template
+|     |- streamreturn.py.j2       # Streaming script
+|- .gitignore
+|- ansible.cfg                    # Ansible config file
+|- hosts                          # Inventory File
+|- passwd                         # Vault password file, not sync'ed
+|- README.md                      # You are here
+|- requirements.txt               # Python dependencies
+|- requirements.yml               # Ansible roles and collections
+|- secrets.yml                    # Encrypted secrets file
+|- setupmanagers.yml              # Playbook to setup management computers
+|- setupworkers.yml               # Playbook to setup workers
+```

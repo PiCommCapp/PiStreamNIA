@@ -10,3 +10,4 @@ roles:
   - name: geerlingguy.security
   - name: geerlingguy.pip
   - name: artis3n.tailscale
+  - name: geerlingguy.dotfiles

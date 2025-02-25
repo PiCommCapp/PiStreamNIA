@@ -4,7 +4,7 @@
     state: absent
 
 - name: Place Off Air Card
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: files/OffAirCard.png
     dest: "{{ home_dir }}/content/OffAirCard.png"
     owner: "{{ ansible_user }}"

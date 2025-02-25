@@ -10,7 +10,7 @@
         path: "{{ home_dir }}/{{ item }}"
         state: directory
         owner: "{{ ansible_user }}"
-        group: server
+        group: "{{ ansible_user }}"
         mode: "0755"
       loop:
         - code
@@ -18,5 +18,6 @@
     - name: Manage Off Air Card
       ansible.builtin.include_tasks: tasks/offair.yml
   roles:
+    - elliotweiser.osx-command-line-tools
     - geerlingguy.mac.homebrew
     - geerlingguy.mac.mas

@@ -11,8 +11,8 @@
       ansible.builtin.file:
         path: "{{ home_dir }}/{{ item }}"
         state: directory
-        owner: "{{ ansible_user }}"
-        group: server
+        owner: admin
+        group: admin
         mode: "0755"
       loop:
         - code
@@ -20,6 +20,16 @@
     - name: Manage Off Air Card
       ansible.builtin.include_tasks: tasks/offair.yml
     - name: Manage Background Card
-      ansible.builtin.include_tasks: tasks/background.yml
+      ansible.builtin.include_tasks: tasks/desktop.yml
   roles:
     - role: geerlingguy.security
+    - role: artis3n.tailscale
+  handlers:
+    - name: Restart X11
+      ansible.builtin.command: "systemctl restart lightdm"
+      become: yes
+      ignore_errors: yes
+
+    - name: Restart LXDE
+      ansible.builtin.command: "pkill -HUP pcmanfm"
+      become_user: "{{ ansible_user }}"

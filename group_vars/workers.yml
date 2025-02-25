@@ -20,7 +20,7 @@ apt_install:
   - zsh
 
 ##### Security
-security_ssh_password_authentication: 'yes'
+security_ssh_password_authentication: "yes"
 security_sudoers_passwordless:
   - "{{ linux_ansible_user }}"
 
@@ -29,8 +29,5 @@ security_sudoers_passwordless:
 tailscale_authkey: "{{ tailscale_auth_key }}"
 # Optional command-line arguments for 'tailscale up'
 tailscale_args: ""
-# Apply provided tags to node
-tailscale_tags:
-  - worker
-  - stream
-  - rpi
+
+home_dir: /home/admin

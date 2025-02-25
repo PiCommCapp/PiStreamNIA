@@ -1,27 +1,29 @@
 mas_installed_app_ids:
   - 497799835 # Xcode
 
-homebrew_installed_packages:
-  - git
-  - wget
-  - curl
-  - htop
-  - ssh-copy-id
-  - ca-certificates
-  - openssl
-  - ffmpeg
-  - flac
-  - fprobe
-  - gnutls
-  - python3
-  - srt
-  - sshpass
-  - x264
-  - x265
-  - yt-dlp
+# homebrew_installed_packages:
+#   - git
+#   - wget
+#   - curl
+#   - htop
+#   - ssh-copy-id
+#   - ca-certificates
+#   - openssl
+#   - ffmpeg
+#   - flac
+#   - fprobe
+#   - gnutls
+#   - python3
+#   - srt
+#   - sshpass
+#   - x264
+#   - x265
+#   - yt-dlp
+#   - prettier
+#   - ruff
+#   - docker
 
 homebrew_cask_apps:
-  - docker
   - google-chrome
   - vlc
   - anydesk

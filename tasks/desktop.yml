@@ -4,10 +4,82 @@
     state: absent
 
 - name: Place Background Card
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: files/BGCard.png
     dest: "{{ home_dir }}/content/BGCard.png"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0755"
-  ignore_errors: false
+
+- name: Ensure LXDE config directory exists
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.config/pcmanfm/LXDE-pi"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+# - name: Set Display Resolution to 1920x1080 at 50Hz
+#   ansible.builtin.command:
+#     cmd: "xrandr --output HDMI-1 --mode 1920x1080 --rate 50"
+#   become_user: "{{ ansible_user }}"
+#   register: xrandr_result
+#   changed_when: "'Configure crtc' in xrandr_result.stdout"
+#   notify: Restart X11
+
+- name: Make Xrandr resolution change persistent
+  ansible.builtin.lineinfile:
+    path: "{{ home_dir }}/.xsessionrc"
+    line: "xrandr --output HDMI-1 --mode 1920x1080 --rate 50"
+    create: yes
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: Ensure autostart directory exists
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.config/autostart"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: Create Xrandr autostart script
+  ansible.builtin.copy:
+    dest: "{{ home_dir }}/.config/autostart/xrandr.desktop"
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Exec=xrandr --output HDMI-1 --mode 1920x1080 --rate 50
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+      Name[en_US]=Set Resolution
+      Name=Set Resolution
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: Ensure 1080p50 progressive mode in config.txt
+  ansible.builtin.lineinfile:
+    path: "/boot/config.txt"
+    line: "{{ item }}"
+  with_items:
+    - "hdmi_group=1"
+    - "hdmi_mode=31"
+    - "disable_overscan=1"
+    - "dtoverlay=vc4-kms-v3d"
+
+- name: Remove Desktop Configure File
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.config/pcmanfm/LXDE-pi/desktop-items-0.conf"
+    state: absent
+
+- name: Configure LXDE wallpaper
+  ansible.builtin.template:
+    src: "templates/desktop-items-0.conf.j2"
+    dest: "{{ home_dir }}/.config/pcmanfm/LXDE-pi/desktop-items-0.conf"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+  notify: Restart X11

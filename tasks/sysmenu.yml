@@ -16,13 +16,8 @@
 - name: Add alias to bashrc
   ansible.builtin.lineinfile:
     path: "/home/{{ ansible_user }}/.bashrc"
-    line: 'alias update="sh ./support.sh"'
+    line: 'alias support="sh ./support.sh"'
     state: present
     create: false
     # backrefs: false
   ignore_errors: false
-
-- name: Source bashrc
-  ansible.builtin.shell:
-    cmd: source "/home/{{ ansible_user }}/.bashrc"
-  ignore_errors: true
