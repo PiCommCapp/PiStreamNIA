@@ -7,20 +7,14 @@ import logging
 from vimeo import VimeoClient
 from requests.exceptions import RequestException
 
-# Define the log file location and configure logging
-LOG_FILE = "/home/admin/desktop/streamreturn.log"  # Update with your desired log file path
-logging.basicConfig{{ "(" }}
-    level=logging.INFO,
-    format='%{{ "(" }}asctime{{ ")" }}s {{ "%(" }}levelname{{ ")" }}s: {{ "%(" }}message{{ ")" }}s',"
-    filename=LOG_FILE,
-    filemode='a'
-{{ ")" }}
+# Configure logging
+logging.basicConfig{{ "(" }}level=logging.INFO{{ ")" }}
 
 # Define the path to your static PNG image
-STATIC_IMAGE_PATH = "{{ home_dir }}/content/offair.png"
+STATIC_IMAGE_PATH = '{{ home_dir }}/content/OffAirCard.png'
 
-# Select stream (change this value if needed)
-STREAM_SELECTION = {{ monitor_stream }}  # Change to 1..6 for different streams
+# Select stream {{ "(" }}change this value if needed{{ ")" }}
+STREAM_SELECTION = {{ monitor_stream }}
 
 # Stream IDs from Vimeo
 STREAMS = {{ "{" }}
@@ -36,13 +30,13 @@ STREAMS = {{ "{" }}
 client = VimeoClient{{ "(" }}
     token="{{ vimeo_access_token }}",
     key="{{ vimeo_client_key }}",
-    secret="{{ vimeo_client_secret }}",
+    secret="{{ vimeo_client_secret}}",
 {{ ")" }}
 
 # Global variables for process management
 keep_looping = True
 current_process = None
-current_mode = None  # "stream" or "image"
+current_mode = None
 
 logging.info{{ "(" }}"Starting Vimeo stream monitor..."{{ ")" }}
 
@@ -50,91 +44,66 @@ while keep_looping:
     try:
         stream_id = STREAMS.get{{ "(" }}STREAM_SELECTION{{ ")" }}
         if not stream_id:
-            logging.error{{ "(" }}"No valid stream ID found for selection: %s", STREAM_SELECTION{{ ")" }}
+            logging.error{{ "(" }}"No valid stream ID found for selection: {{ "%" }}s", STREAM_SELECTION{{ ")" }}
             break
 
         # Build the Vimeo API request URL
-        stream_url = f"https://api.vimeo.com/me/live_events/{{ "{" }}stream_id{{ "}" }}/m3u8_playback"
+        stream_url = f"https://api.vimeo.com/me/live_events/{stream_id}/m3u8_playback"
 
         # Request JSON data
         response = client.get{{ "(" }}stream_url{{ ")" }}
-        response_data = response.json{{ "(" }}{{ ")" }}
+        response_data = response.json{{ "()" }}
 
-        # Determine which mode to run: "stream" if URL exists, otherwise "image"
+        # Determine which mode to run
         if "m3u8_playback_url" in response_data:
             new_mode = "stream"
         else:
             new_mode = "image"
 
-        # If the mode has changed, kill the existing process {{ "(" }}if any{{ ")" }}
+        # If the mode has changed, kill the existing ffplay process {{ "(" }}if any{{ ")" }}
         if new_mode != current_mode:
-            if current_process and current_process.poll{{ "(" }}{{ ")" }} is None:
-                logging.info{{ "(" }}"Killing current process to switch mode."{{ ")" }}
-                current_process.kill{{ "(" }}{{ ")" }}
+            if current_process and current_process.poll() is None:
+                logging.info{{ "(" }}"Killing current ffplay process to switch mode."{{ ")" }}
+                current_process.kill{{ "()" }}
                 current_process = None
 
             if new_mode == "stream":
                 video_url = response_data{{ "[" }}"m3u8_playback_url"{{ "]" }}
                 logging.info{{ "(" }}"Stream active. URL: %s", video_url{{ ")" }}
-
-                # Primary ffplay command for streaming
                 ffplay_command = {{ "[" }}
                     "ffplay",
-                    "-fs",                  # Fullscreen
-                    "-hwaccel", "none",     # Disable hardware acceleration
+                    "-fs",
                     "-framedrop",
                     "-max_delay", "10000000",
                     "-rtbufsize", "100M",
                     "-volume", "100",
                     video_url
                 {{ "]" }}
-                logging.info{{ "(" }}"Executing ffplay command for stream: %s", " ".join{{ "(" }}ffplay_command{{ ")" }}{{ ")" }}
+                logging.info{{ "(" }}"Executing ffplay command for stream: {{ "%" }}s", " ".join{{ "(" }}ffplay_command{{ "))" }}
                 current_process = subprocess.Popen{{ "(" }}ffplay_command{{ ")" }}
-
-                # Wait briefly to verify ffplay started successfully
-                time.sleep{{ "(" }}10{{ ")" }}
-                if current_process.poll{{ "(" }}{{ ")" }} is not None:
-                    logging.error{{ "(" }}"ffplay terminated unexpectedly. Falling back to VLC."{{ ")" }}
-                    # Fallback VLC command
-                    vlc_command = {{ "[" }}
-                        "cvlc",
-                        "--fullscreen",
-                        "--no-video-title",
-                        "--avcodec-hw=none",
-                        "--network-caching=10000",
-                        "--file-caching=10000",
-                        "--live-caching=10000",
-                        "--drop-late-frames",
-                        "--skip-frames",
-                        "--volume-step=256",
-                        video_url
-                    {{ "]" }}
-                    logging.info{{ "(" }}"Executing fallback VLC command for stream: %s", " ".join{{ "(" }}vlc_command{{ "))" }}
-                    current_process = subprocess.Popen(vlc_command)
             else:
                 logging.warning{{ "(" }}"Stream not active. Displaying static image."{{ ")" }}
-                # Command to display a static PNG image in fullscreen
                 image_command = {{ "[" }}
                     "ffplay",
-                    "-fs",         # Fullscreen
-                    "-loop", "1",  # Loop the image indefinitely
+                    "-fs",
+                    "-loop", "1",  # loop the image indefinitely
                     STATIC_IMAGE_PATH
                 {{ "]" }}
-                logging.info{{ "(" }}"Executing ffplay command for static image: %s", " ".join{{ "(" }}image_command{{ "))" }}
+                logging.info{{ "(" }}"Executing ffplay command for static image: {{ "%" }}s", " ".join{{ "(" }}image_command{{ "))" }}
                 current_process = subprocess.Popen{{ "(" }}image_command{{ ")" }}
             
             current_mode = new_mode
         else:
-            logging.info{{ "(" }}"No change in mode {{ "(" }}%s{{ ")" }}.", current_mode{{ ")" }}
+            logging.info{{ "(" }}"No change in mode {{ "(%s)" }}.", current_mode{{ ")" }}
     except RequestException as e:
-        logging.error{{ "(" }}"Network error: %s", str{{ "(" }}e{{ "))" }}
+        logging.error{{ "(" }}"Network error: {{ "%" }}s", str{{ "(" }}e{{ "))" }}
 
-    # Wait for 30 seconds before rechecking
-    time.sleep{{ "(" }}30{{ ")" }}
+    # Wait for 10 seconds before rechecking
+    time.sleep{{ "(" }}10{{ ")" }}
 
-    # If the current process has ended unexpectedly, reset mode so it will be relaunched in the next loop
+    # If the ffplay process has ended unexpectedly, reset mode so it will be relaunched in the next loop
     if current_process and current_process.poll{{ "()" }} is not None:
-        logging.info{{ "(" }}"Process ended. Resetting mode."{{ ")" }}
+        logging.info{{ "(" }}"ffplay process ended. Resetting mode."{{ ")" }}
         current_mode = None
         current_process = None
 

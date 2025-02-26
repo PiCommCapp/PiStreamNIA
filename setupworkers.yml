@@ -21,9 +21,13 @@
       ansible.builtin.include_tasks: tasks/offair.yml
     - name: Manage Background Card
       ansible.builtin.include_tasks: tasks/desktop.yml
+    - name: Manage Stream Return
+      ansible.builtin.include_tasks: tasks/streamreturn.yml
+
   roles:
     - role: geerlingguy.security
     - role: artis3n.tailscale
+
   handlers:
     - name: Restart X11
       ansible.builtin.command: "systemctl restart lightdm"
