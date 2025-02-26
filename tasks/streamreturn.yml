@@ -3,11 +3,6 @@
     path: "{{ home_dir }}/code/streamreturn.py"
     state: absent
 
-- name: Remove Stream Return Execution Script
-  ansible.builtin.file:
-    path: "{{ home_dir }}/scripts/streamreturn.sh"
-    state: absent
-
 - name: Remove Auto-start Stream Return Service
   ansible.builtin.file:
     path: "{{ home_dir }}/.config/autostart/streamreturn.desktop"
@@ -17,15 +12,6 @@
   ansible.builtin.template:
     src: templates/streamreturn.py.j2
     dest: "{{ home_dir }}/code/streamreturn.py"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0755"
-  ignore_errors: false
-
-- name: Template out Stream Return Execution Script
-  ansible.builtin.template:
-    src: templates/stream_shell.sh.j2
-    dest: "{{ home_dir }}/code/streamreturn.sh"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0755"
