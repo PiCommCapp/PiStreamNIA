@@ -25,3 +25,8 @@
     group: "{{ ansible_user }}"
     mode: "0644"
   ignore_errors: false
+
+- name: Install pyvimeo in virtualenv
+  ansible.builtin.pip:
+    name: pyvimeo
+    virtualenv: "{{ home_dir }}/code/.venv"
