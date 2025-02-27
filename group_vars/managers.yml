@@ -23,6 +23,7 @@ homebrew_installed_packages:
   - ansible-lint
   - tailscale
   - font-meslo-lg-nerd-font
+  - pandoc
 
 homebrew_cask_apps:
   - google-chrome

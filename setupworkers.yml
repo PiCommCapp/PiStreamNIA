@@ -1,3 +1,11 @@
+- name: Raspberry Pi Configurations
+  hosts: raspberrypi
+  vars_files: secrets.yml
+  become: true
+  tasks:
+    - name: Configure Raspberry Pi
+      ansible.builtin.include_tasks: tasks/rpi.yml
+
 - name: Get the basics setup on linux machines
   hosts: linux
   vars_files: secrets.yml

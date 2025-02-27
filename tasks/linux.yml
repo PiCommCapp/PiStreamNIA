@@ -9,6 +9,8 @@
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
+    update_cache: true
+    upgrade: full
   loop: "{{ apt_install }}"
   when: apt_install is defined
 

@@ -1,0 +1,16 @@
+- name: Activate X11
+  ansible.builtin.shell:
+    cmd: raspi-config nonint do_wayland W1
+    executable: /bin/bash
+- name: Configure RPi to boot to desktop
+  ansible.builtin.shell:
+    cmd: raspi-config nonint do_boot_behaviour B4
+    executable: /bin/bash
+- name: Activate VNC Server
+  ansible.builtin.shell:
+    cmd: raspi-config nonint do_vnc 0
+    executable: /bin/bash
+- name: Expand RPi volume
+  ansible.builtin.shell:
+    cmd: raspi-config nonint do_expand_rootfs
+    executable: /bin/bash
