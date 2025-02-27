@@ -10,6 +10,7 @@
     "eamodio.gitlens",
     "gruntfuggly.todo-tree",
     "github.copilot",
-    "oderwat.indent-rainbow"
+    "oderwat.indent-rainbow",
+    "github.vscode-github-actions"
   ]
 }
