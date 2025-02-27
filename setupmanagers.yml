@@ -1,8 +1,13 @@
 - name: Get the basics setup on linux machines
   hosts: managers
   vars_files: secrets.yml
-  become: true
+  # become: true
+  roles:
+    - elliotweiser.osx-command-line-tools
   tasks:
+    - name: Homebrew
+      ansible.builtin.include_tasks:
+        file: tasks/homebrew.yml
     - name: Place SSH Config File
       ansible.builtin.include_tasks: tasks/sshconfig.yml
     - name: Create production directories
@@ -10,14 +15,46 @@
         path: "{{ home_dir }}/{{ item }}"
         state: directory
         owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
+        group: "{{ ansible_user_group }}"
         mode: "0755"
       loop:
         - code
         - content
-    - name: Manage Off Air Card
-      ansible.builtin.include_tasks: tasks/offair.yml
-  roles:
-    - elliotweiser.osx-command-line-tools
-    - geerlingguy.mac.homebrew
-    - geerlingguy.mac.mas
+    # - name: Set hostname
+    #   ansible.builtin.hostname:
+    #     name: "{{ hostname_hostname }}"
+    #     use: macos
+    - name: Tap a Homebrew repository, state present
+      community.general.homebrew_tap:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ homebrew_taps }}"
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        name: "{{ item }}"
+        state: present
+        update_homebrew: true
+        upgrade_all: true
+      loop: "{{ homebrew_installed_packages }}"
+    - name: Install Homebrew cask packages
+      community.general.homebrew_cask:
+        name: "{{ item }}"
+        state: present
+        upgrade_all: true
+      loop: "{{ homebrew_cask_apps }}"
+    - name: Upgrade all homebrew packages
+      homebrew:
+        update_homebrew: true
+        upgrade_all: true
+      when: homebrew_upgrade_all_packages
+      notify:
+        - Clear homebrew cache
+
+  handlers:
+    - name: Clear homebrew cache
+      ansible.builtin.file:
+        path: "{{ homebrew_cache_path.stdout | trim }}"
+        state: absent
+      when: "homebrew_clear_cache | bool"
+      become: "{{ (homebrew_user != ansible_user_id) | bool }}"
+      become_user: "{{ homebrew_user }}"

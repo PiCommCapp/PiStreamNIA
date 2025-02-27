@@ -10,3 +10,7 @@ locales_default:
   lang: en_GB.UTF-8
 
 timezone: Europe/Dublin
+
+home_dir: /home/{{ ansible_user }}
+
+ansible_user_group: "{{ ansible_user }}"

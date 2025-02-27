@@ -8,7 +8,7 @@
     src: files/BGCard.png
     dest: "{{ home_dir }}/content/BGCard.png"
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0755"
 
 - name: Ensure LXDE config directory exists
@@ -16,7 +16,7 @@
     path: "{{ home_dir }}/.config/pcmanfm/LXDE-pi"
     state: directory
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0755"
 
 # - name: Set Display Resolution to 1920x1080 at 50Hz
@@ -33,7 +33,7 @@
     line: "xrandr --output HDMI-1 --mode 1920x1080 --rate 50"
     create: yes
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0644"
 
 - name: Ensure autostart directory exists
@@ -41,7 +41,7 @@
     path: "{{ home_dir }}/.config/autostart"
     state: directory
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0755"
 
 - name: Create Xrandr autostart script
@@ -57,7 +57,7 @@
       Name[en_US]=Set Resolution
       Name=Set Resolution
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0644"
 
 - name: Ensure 1080p50 progressive mode in config.txt
@@ -80,6 +80,6 @@
     src: "templates/desktop-items-0.conf.j2"
     dest: "{{ home_dir }}/.config/pcmanfm/LXDE-pi/desktop-items-0.conf"
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    group: "{{ ansible_user_group }}"
     mode: "0644"
   notify: Restart X11

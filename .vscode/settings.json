@@ -17,7 +17,7 @@
   "ansible.useFullyQualifiedCollectionNames": true,
   "ansible.hover.documentation": true,
   "ansible.completion.enabled": true,
-  "ansible.ansible.path": "${workspaceFolder}.venv/bin/ansible",
+  "ansible.ansible.path": ".venv/bin/ansible",
 
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",

@@ -1,5 +1,4 @@
-mas_installed_app_ids:
-  - 497799835 # Xcode
+homebrew_taps: []
 
 homebrew_installed_packages:
   - git
@@ -17,11 +16,13 @@ homebrew_installed_packages:
   - srt
   - sshpass
   - x264
-  - x265
   - yt-dlp
   - prettier
   - ruff
   - docker
+  - ansible-lint
+  - tailscale
+  - font-meslo-lg-nerd-font
 
 homebrew_cask_apps:
   - google-chrome
@@ -32,3 +33,10 @@ homebrew_cask_apps:
   - raspberry-pi-imager
   - tigervnc-viewer
   - wireshark
+  - angry-ip-scanner
+
+##### Tailscale
+# Required Node auth key to authenticate to Tailscale
+tailscale_authkey: "{{ tailscale_auth_key }}"
+# Optional command-line arguments for 'tailscale up'
+tailscale_args: ""
