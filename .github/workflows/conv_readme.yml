@@ -21,7 +21,7 @@ jobs:
         run: pandoc README.md -o README.doc
 
       - name: Upload DOC file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: readme-doc
           path: README.doc
