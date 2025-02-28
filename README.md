@@ -191,6 +191,7 @@ Lists do not include dependencies that are also installed
 
 - Python              # Scripting language
 - Docker              # Container process backend
+- Homebrew            # Mac package manager
 - Google Chrome       # Web thingy
 - VLC                 # Video player
 - anydesk             # Remote access
