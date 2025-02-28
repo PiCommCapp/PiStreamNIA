@@ -1,6 +1,7 @@
 # PiStreamNIA
 
 - [PiStreamNIA](#pistreamnia)
+  - [Welcome](#welcome)
   - [Worker Setup](#worker-setup)
   - [Manager Setup](#manager-setup)
     - [Setting up SSH communications](#setting-up-ssh-communications)
@@ -13,6 +14,14 @@
       - [Managers](#managers)
       - [Workers](#workers)
     - [Application Structure](#application-structure)
+
+## Welcome
+
+This document describes using the [Ansible](https://github.com/ansible/ansible?tab=readme-ov-file) scripts used to provision the devices used in monitoring internet video feeds. The repository is located on [GITHUB HERE](https://github.com/PiCommCapp/PiStreamNIA).
+
+The general setup is with one "management" computer and, currently, 4 "workers." Workers are one per returning stream and are [Raspberry Pi 5's](https://www.raspberrypi.com/products/raspberry-pi-5/). 
+
+The scripting on the devices is built using [Python3](https://www.python.org/) and are monitoring streams via [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) from [Vimeo](https://vimeo), including providing the needed authorization headers.
 
 ## Worker Setup
 
