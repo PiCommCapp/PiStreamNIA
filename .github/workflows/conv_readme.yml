@@ -18,7 +18,7 @@ jobs:
           sudo apt-get install -y pandoc
 
       - name: Convert README.md to DOCX file
-        run: pandoc README.md -o README.docx
+        run: pandoc -V papersize=a4 README.md -o README.docx
 
       - name: Upload DOC file as artifact
         uses: actions/upload-artifact@v4.6.1

@@ -5,12 +5,15 @@
   loop: "{{ apt_ppa_repos }}"
   when: apt_ppa_repos is defined
 
+- name: Update Packages
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: full
+
 - name: Install Required Packages
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
-    update_cache: true
-    upgrade: full
   loop: "{{ apt_install }}"
   when: apt_install is defined
 

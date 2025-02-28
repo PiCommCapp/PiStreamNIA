@@ -8,6 +8,7 @@
   - [Deploy Stream Return Configurations](#deploy-stream-return-configurations)
     - [Install and configure repository](#install-and-configure-repository)
     - [Running the provisioning scripts](#running-the-provisioning-scripts)
+    - [Updating the repository](#updating-the-repository)
   - [General Information](#general-information)
     - [Secrets!!](#secrets)
     - [Applications Installed](#applications-installed)
@@ -27,7 +28,7 @@ The scripting on the devices is built using [Python3](https://www.python.org/) a
 
 On an existing computer download the [Raspberry Pi Imager](https://www.raspberrypi.com/software/), insert a SD Card, and launch the software.
 
-Select the appropriate RPi hardware and then `Raspberry Pi OS Full`. Then select the SD Card and select `Create`. When you are asked to apply settings select `Edit Settings`. Set the username and password, make sure wifi is off, and select to install a SSH server. Finally set and note the `hostname`.
+Select the RPi model being used and then select `Raspberry Pi OS (64-bit)`. Select the SD Card and select `Create`. When you are asked to apply settings select `Edit Settings`. Set the username and password, make sure wifi is off, and select to install a SSH server. Finally set and note the `hostname`.
 
 Boot and connect:
 Connect the RPi to the streaming network and boot it up.
@@ -41,7 +42,7 @@ ssh {username}@{hostname}.local
 Now set a staic IP address:
 
 ```sh
-sudo nmlci
+sudo nmtui
 ```
 
 Reboot the RPi
@@ -56,13 +57,6 @@ These instructions assume that the management PC is a Mac.
 
 Install and configure the computer with the appropriate IP address.
 Note: Pay special attention to the username (use the actual username, not the “Full Name”) and the password. These must match what is in the secrets.yml file (they can be changed there as needed).
-
-Generate an SSH key:
-Open a terminal, create an SSH key, and follow the prompts (no password is required).
-
-```sh
-ssh-keygen -t ed25519 -C "gmail@gmail.com"
-```
 
 Install Xcode Command Line Tools:
 
@@ -82,14 +76,20 @@ Upgrade Pip:
 sudo pip3 install --upgrade pip
 ```
 
-Create a code directory and enter it:
+Create a code directory:
 
 ```sh
-mkdir ~/code &&
-cd ~/code
+mkdir ~/code
 ```
 
 ### Setting up SSH communications
+
+On the management PC generate an SSH key.
+Open a terminal, create an SSH key, and follow the prompts (no password is required).
+
+```sh
+ssh-keygen -t ed25519 -C "gmail@gmail.com"
+```
 
 From the management terminal copy SSH key to the workers.
 
@@ -152,6 +152,18 @@ ansible-galaxy list
 
 ### Running the provisioning scripts
 
+Open a terminal on the managment computer and navigate to the project directory
+
+```sh
+cd ~/code/PiStreamNIA
+```
+
+Activate the virtual environment, if not already active;
+
+```sh
+source .venv/bin/activate
+```
+
 Execute the provisioning scripts
 
 For managers:
@@ -164,6 +176,20 @@ For workers:
 
 ```sh
 ansible-playbook setupworkers.yml
+```
+
+### Updating the repository
+
+Open a terminal on the management computer and navigate to the project directory:
+
+```sh
+cd ~/code/PiStreamNIA
+```
+
+Pull the latest updates:
+
+```sh
+git pull
 ```
 
 ## General Information
