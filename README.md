@@ -41,7 +41,6 @@ Reboot the RPi
 sudo reboot
 ```
 
-
 ## Manager Setup
 
 These instructions assume that the management PC is a Mac.
@@ -190,19 +189,19 @@ Lists do not include dependencies that are also installed
 
 #### Managers
 
-- Python
-- Docker
-- Google Chrome
-- VLC
-- anydesk
-- Github Deskop
-- VS Code
-- RPi Imager
-- TigerVNC Viewer
-- Wireshark
-- Angry IP Scanner
-- Tailscale
-- FFmpeg
+- Python              # Scripting language
+- Docker              # Container process backend
+- Google Chrome       # Web thingy
+- VLC                 # Video player
+- anydesk             # Remote access
+- Github Deskop       # Repository access
+- VS Code             # Programming IDE
+- RPi Imager          # SD Card imager
+- TigerVNC Viewer     # Remote access to workers
+- Wireshark           # Network analyser  
+- Angry IP Scanner    # Network scanner
+- Tailscale           # Mesh VPN service
+- FFmpeg              # Video transcoder
 
 #### Workers
 

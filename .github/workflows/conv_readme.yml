@@ -1,4 +1,4 @@
-name: Convert Markdown to DOC
+name: Convert Markdown to DOCX
 
 on:
   push:
@@ -17,11 +17,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      - name: Convert README.md to DOC file
+      - name: Convert README.md to DOCX file
         run: pandoc README.md -o README.doc
 
       - name: Upload DOC file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: readme-doc
-          path: README.doc
+          name: readme-docx
+          path: README.docx
