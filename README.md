@@ -208,6 +208,7 @@ Lists do not include dependencies that are also installed
 - Python
 - FFmpeg
 - VLC
+- Tailscale
 
 ### Application Structure
 
