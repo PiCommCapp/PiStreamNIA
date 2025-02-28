@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
 
       - name: Install Pandoc
         run: |
@@ -21,7 +21,8 @@ jobs:
         run: pandoc README.md -o README.docx
 
       - name: Upload DOC file as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: readme-docx
           path: README.docx
+          overwrite: true
