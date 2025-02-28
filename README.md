@@ -14,8 +14,6 @@
       - [Workers](#workers)
     - [Application Structure](#application-structure)
 
-
-
 ## Worker Setup
 
 On an existing computer download the [Raspberry Pi Imager](https://www.raspberrypi.com/software/), insert a SD Card, and launch the software.
