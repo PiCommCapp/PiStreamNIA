@@ -1,16 +1,14 @@
 {
   "recommendations": [
     "ms-python.python",
-    "ms-python.vscode-pylance",
     "charliermarsh.ruff",
     "redhat.vscode-yaml",
     "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
     "streetsidesoftware.code-spell-checker",
-    "eamodio.gitlens",
     "gruntfuggly.todo-tree",
     "github.copilot",
     "oderwat.indent-rainbow",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "redhat.ansible"
   ]
 }
