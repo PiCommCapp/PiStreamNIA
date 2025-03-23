@@ -11,3 +11,5 @@ passwd
 
 .venv/
 venv/
+
+.history/
