@@ -16,6 +16,6 @@
         "tasks/*.yml"
       ]
     },
-    "ansible.python.interpreterPath": "/Users/dcapp3/code/PiStreamNIA/.venv/bin/python3"
+    "ansible.python.interpreterPath": "/Users/pistream4/code/PiStreamNIA/.venv/bin/python"
   }
 }

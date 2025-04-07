@@ -26,6 +26,11 @@
     mode: "0644"
   ignore_errors: false
 
+- name: Create virtual environment
+  ansible.builtin.command: "python3 -m venv {{ home_dir }}/code/.venv"
+  args:
+    creates: "{{ home_dir }}/code/.venv"
+
 - name: Install pyvimeo in virtualenv
   ansible.builtin.pip:
     name: pyvimeo
